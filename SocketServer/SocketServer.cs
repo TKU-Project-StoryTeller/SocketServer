@@ -125,7 +125,7 @@ namespace SocketPratice
                             //將資料進行編碼並轉為Byte後傳遞
                             //Client.Send(Encoding.ASCII.GetBytes("Server: " + sendMessage), SocketFlags.None);
 
-                            var ConvertBuffer = Encoding.ASCII.GetBytes(sendMessage);
+                            var ConvertBuffer = Encoding.UTF8.GetBytes(sendMessage);
                             var SendBuffer = new byte[1024];
                             ConvertBuffer.CopyTo(SendBuffer, 0);
                             foreach (Socket s in dict.Values)
@@ -168,7 +168,7 @@ namespace SocketPratice
                                         //Console.WriteLine(len);
                                         if (len > 0)
                                         {
-                                            receiveMessage = Encoding.ASCII.GetString(Buffer, 0, len);
+                                            receiveMessage = Encoding.UTF8.GetString(Buffer, 0, len);
                                             OnMessageReceive?.Invoke("Client: " + receiveMessage);
                                         }
                                     }
@@ -210,7 +210,7 @@ namespace SocketPratice
                 if (Client.Connected == true)//若成功連線才傳遞資料
                 {
                     //將資料進行編碼並轉為Byte後傳遞
-                    Client.Send(Encoding.ASCII.GetBytes(sendMessage));
+                    Client.Send(Encoding.UTF8.GetBytes(sendMessage));
                 }
             }
             catch (Exception)
